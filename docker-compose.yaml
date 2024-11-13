@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  u_postgresql:
+    image: postgres:latest
+    ports:
+      - "5302:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./src/main/resources/sql/DDL.sql:/docker-entrypoint-initdb.d/DDL.sql
+      - ./src/main/resources/sql/DML.sql:/docker-entrypoint-initdb.d/DML.sql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
