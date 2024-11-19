@@ -1,6 +1,17 @@
-<user>
-    <id>2</id>
-    <name>User</name>
-    <email>user2@mail.com</email>
-    <phone>76543210</phone>
-</user>
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.5" class="java.beans.XMLDecoder">
+ <object class="ua.undrentide.xmlparserapp.entity.User">
+  <void property="email">
+   <string>user302@mail.com</string>
+  </void>
+  <void property="id">
+   <long>2</long>
+  </void>
+  <void property="name">
+   <string>User302</string>
+  </void>
+  <void property="phone">
+   <string>302</string>
+  </void>
+ </object>
+</java>
