@@ -17,4 +17,11 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
             WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    protected ResponseEntity<?> handleUserNotFoundException(
+            UserNotFoundException e,
+            WebRequest request) {
+        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
 }

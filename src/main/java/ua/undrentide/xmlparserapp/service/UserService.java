@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.undrentide.xmlparserapp.dal.UserRepository;
 import ua.undrentide.xmlparserapp.entity.User;
 import ua.undrentide.xmlparserapp.exception.IncorrectOperationException;
+import ua.undrentide.xmlparserapp.exception.UserNotFoundException;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -88,9 +89,9 @@ public class UserService {
         response.setHeader(headerKey, headerValue);
         List<User> userList = new ArrayList<>();
         for (Long innerId : idList) {
-            userList.add(userRepository.findById(innerId).orElseThrow());
+            userList.add(userRepository.findById(innerId).orElseThrow(
+                    () -> new UserNotFoundException("User not found.")));
         }
-
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Users");
         HSSFRow row = sheet.createRow(0);
@@ -110,7 +111,6 @@ public class UserService {
         for (int i = 0; i < 5; i++) {
             sheet.autoSizeColumn(i);
         }
-
         ServletOutputStream servletOutputStream;
         try {
             servletOutputStream = response.getOutputStream();
